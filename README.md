@@ -24,6 +24,8 @@ By the end of the session, participants should be able to:
 ## Run In GitHub Codespaces
 This repository includes `.devcontainer/` so exercises can run in Codespaces with Docker, Containerlab, and Jinja tools preinstalled.
 
+Codespaces demo video: [Watch the demo](https://github.com/user-attachments/assets/3afe409e-19d4-4c02-a227-750fa296ed78)
+
 1. Open the repository in GitHub Codespaces.
 2. Wait for post-create setup to complete.
 3. If Docker is not ready, run:
