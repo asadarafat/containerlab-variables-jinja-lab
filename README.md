@@ -21,6 +21,22 @@ By the end of the session, participants should be able to:
   - `ghcr.io/nokia/srlinux:latest` (Exercise 3)
 - Optional: VS Code + Containerlab extension
 
+## Run In GitHub Codespaces
+This repository includes `.devcontainer/` so exercises can run in Codespaces with Docker, Containerlab, and Jinja tools preinstalled.
+
+1. Open the repository in GitHub Codespaces.
+2. Wait for post-create setup to complete.
+3. If Docker is not ready, run:
+```bash
+bash .devcontainer/scripts/start-docker.sh
+```
+4. Verify tools:
+```bash
+containerlab version
+docker version
+jinja2 --version
+```
+
 ## Suggested Timeline (90-120 min)
 1. Exercise 1 - 10 to 15 min
 2. Exercise 2 - 15 to 20 min

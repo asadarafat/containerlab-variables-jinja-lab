@@ -1,0 +1,27 @@
+{
+  "name": "containerlab-variables-jinja-lab",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "remoteUser": "root",
+  "init": true,
+  "privileged": true,
+  "containerEnv": {
+    "CLAB_LABDIR_BASE": "/workspaces/.clab",
+    "DOCKER_BUILDKIT": "1",
+    "COMPOSE_DOCKER_CLI_BUILD": "1",
+    "DOCKER_STORAGE_DRIVER": "vfs"
+  },
+  "postCreateCommand": "bash .devcontainer/scripts/post-create.sh || true",
+  "postStartCommand": "bash .devcontainer/scripts/post-start.sh || true",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "redhat.vscode-yaml",
+        "srl-labs.vscode-containerlab"
+      ]
+    }
+  }
+}
