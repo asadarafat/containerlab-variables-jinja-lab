@@ -1,0 +1,5 @@
+topo_name: topo4
+instance_id: 5
+node_count: 4
+node_image: alpine:latest
+mgmt_network: stuttgart

@@ -1,0 +1,34 @@
+# Exercise 3 – using VS code containerlab extension
+# Tasks:
+#  - create bulk link via bulk link editor
+
+# Learning:
+#  - vscode containerlab extension familiarization
+#  - bulk link editor concept
+
+name: topo03
+
+topology:
+  nodes:
+    srl1:
+      kind: nokia_srlinux
+      type: ixrd1
+      image: ghcr.io/nokia/srlinux:latest
+    client1:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool:latest
+    client2:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool:latest
+    client3:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool:latest
+    client4:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool:latest
+
+  links:
+    - endpoints: [ "srl1:e1-1", "client1:eth1" ]
+    - endpoints: [ "srl1:e1-2", "client2:eth1" ]
+    - endpoints: [ "srl1:e1-3", "client3:eth1" ]
+    - endpoints: [ "srl1:e1-4", "client4:eth1" ]

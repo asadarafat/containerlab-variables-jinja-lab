@@ -1,0 +1,31 @@
+{#
+  Template for Exercise 4
+  Render with values.yaml (or your own data)
+#}
+{% set topo_name = topo_name | default("topo04") %}
+{% set mgmt_network = mgmt_network | default("stuttgart") %}
+{% set node_image = node_image | default("alpine:latest") %}
+{% set node_count = node_count | default(4) %}
+{% set instance_id = instance_id | default(5) %}
+
+name: {{ topo_name }}
+
+mgmt:
+  network: {{ mgmt_network }}
+  ipv4-subnet: 99.1.{{ instance_id }}.0/24
+
+topology:
+  nodes:
+{% for i in range(1, node_count + 1) %}
+    r{{ i }}:
+      kind: linux
+      image: {{ node_image }}
+      mgmt-ipv4: 99.1.{{ instance_id }}.{{ 10 + i }}
+{% endfor %}
+
+  links:
+{% for i in range(1, node_count) %}
+    - endpoints: ["r{{ i }}:eth1", "r{{ i+1 }}:eth1"]
+{% endfor %}
+    # closing the loop
+    - endpoints: ["r{{ node_count }}:eth1", "r1:eth1"]

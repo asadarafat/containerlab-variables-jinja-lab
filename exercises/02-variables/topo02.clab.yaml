@@ -1,0 +1,34 @@
+# Exercise 2 – Introduce Variables (25 min)
+
+# Tasks:
+#  - Deploy with --env-file
+#     INSTANCE_ID=10 clab deploy --topo topo02.clab.yaml
+#  - Change lab name
+#  - Add third node via variables
+
+# Learning:
+#  - Reusability
+#  - Automation concept
+#  - Separation of logic and data
+
+name: topo02
+
+mgmt:
+  network: stuttgart # management network name
+  ipv4-subnet: 99.1.${INSTANCE_ID}.0/24 # ipv4 range
+
+topology:
+
+  nodes:
+    r1:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 99.1.${INSTANCE_ID}.11
+
+    r2:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 99.1.${INSTANCE_ID}.12
+
+  links:
+    - endpoints: ["r1:eth1", "r2:eth1"]

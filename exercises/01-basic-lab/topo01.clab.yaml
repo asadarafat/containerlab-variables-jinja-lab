@@ -1,0 +1,25 @@
+# Exercise 1 – Basic Lab
+
+# Tasks:
+#  - Deploy
+#  - Exec into r1
+#  - Ping r2
+#  - Destroy lab
+
+# Learning:
+#  - Basic structure
+#  - Deploy/destroy cycle
+
+name: lab1
+
+topology:
+  nodes:
+    r1:
+      kind: linux
+      image: alpine:latest
+    r2:
+      kind: linux
+      image: alpine:latest
+
+  links:
+    - endpoints: [ "r1:eth1", "r2:eth1" ]

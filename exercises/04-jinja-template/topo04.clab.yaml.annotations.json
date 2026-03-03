@@ -1,0 +1,39 @@
+{
+  "freeTextAnnotations": [],
+  "freeShapeAnnotations": [],
+  "groupStyleAnnotations": [],
+  "networkNodeAnnotations": [],
+  "nodeAnnotations": [
+    {
+      "id": "r1",
+      "position": {
+        "x": 360,
+        "y": 380
+      }
+    },
+    {
+      "id": "r2",
+      "position": {
+        "x": 440,
+        "y": 260
+      }
+    },
+    {
+      "id": "r3",
+      "position": {
+        "x": 460,
+        "y": 440
+      }
+    },
+    {
+      "id": "r4",
+      "position": {
+        "x": 520,
+        "y": 320
+      }
+    }
+  ],
+  "edgeAnnotations": [],
+  "aliasEndpointAnnotations": [],
+  "viewerSettings": {}
+}
