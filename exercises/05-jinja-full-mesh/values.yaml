@@ -2,4 +2,4 @@ seed_name: topo-mesh
 instance_id: 3
 node_count: 4
 node_image: alpine:latest
-mgmt_network: stuttgart
+mgmt_network: berlin

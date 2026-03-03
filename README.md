@@ -66,7 +66,7 @@ If not, replace `clab` with `containerlab`.
 File: `exercises/01-basic-lab/topo01.clab.yaml`
 
 Goal:
-Deploy a minimal lab and verify node-to-node connectivity.
+Deploy a minimal lab, inspect it, and clean it up.
 
 Steps:
 1. Deploy.
@@ -77,12 +77,7 @@ clab deploy -t exercises/01-basic-lab/topo01.clab.yaml
 ```bash
 clab inspect -t exercises/01-basic-lab/topo01.clab.yaml
 ```
-3. Enter `r1` and ping `r2` management IP.
-```bash
-docker exec -it clab-lab1-r1 sh
-ping -c 3 <r2-mgmt-ip>
-```
-4. Destroy.
+3. Destroy.
 ```bash
 clab destroy -t exercises/01-basic-lab/topo01.clab.yaml
 ```
@@ -140,6 +135,13 @@ Steps:
 2. Paste `template.clab.yaml.j2` as template input and `values.yaml` as data input.
 3. Render, then compare the output with `topo04.clab.yaml`.
 4. Change `instance_id` and `node_count`, render again, then deploy.
+
+Corner case note:
+- Jinja generation can still produce invalid topology edge cases.
+- In this exercise, the ring template can render duplicate endpoints (`rX:eth1` reused), which causes deploy failure such as:
+  `ERROR Duplicate endpoint r1:eth1 ...`
+- Depending on impact, manual correction of the rendered topology is acceptable.
+- Practical manual fix approach: keep the ring order but increment interface indexes so each node uses unique interfaces (for example `eth1` and `eth2` in a 4-node ring).
 
 ### Exercise 5 - Full-Mesh DRY Challenge
 Files:
