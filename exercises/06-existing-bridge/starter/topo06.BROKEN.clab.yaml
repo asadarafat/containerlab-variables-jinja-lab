@@ -1,0 +1,26 @@
+# Exercise 6 starter - intentionally broken
+
+# Goal:
+#  - Make this topology reuse the existing br_nsp_ip_oob bridge
+#  - Keep the variable-driven subnet pattern from exercise 2
+
+name: topo06
+
+mgmt:
+  network: stuttgart
+  ipv4-subnet: 99.1.${SUBNET_ID}.0/24
+
+topology:
+  nodes:
+    r1:
+      kind: linux
+      image: alpine:latest # use harbor.nice.nokia.net/docker/alpine:latest if needed
+      mgmt-ipv4: 10.2.${SUBNET_ID}.11
+
+    r2:
+      kind: linux
+      image: alpine:latest # use harbor.nice.nokia.net/docker/alpine:latest if needed
+      mgmt-ipv4: 10.2.${SUBNET_ID}.2
+
+  links:
+    - endpoints: ["r1:eth1", "r2:eth1"]

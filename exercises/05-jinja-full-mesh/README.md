@@ -8,7 +8,7 @@ Create a scalable full-mesh topology in Containerlab using Jinja2.
 seed_name: topo-mesh
 instance_id: 3
 node_count: 4
-node_image: alpine:latest
+node_image: alpine:latest # use harbor.nice.nokia.net/docker/alpine:latest if needed
 ```
 Optional:
 ```yaml

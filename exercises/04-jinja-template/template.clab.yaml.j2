@@ -4,7 +4,7 @@
 #}
 {% set topo_name = topo_name | default("topo04") %}
 {% set mgmt_network = mgmt_network | default("stuttgart") %}
-{% set node_image = node_image | default("alpine:latest") %}
+{% set node_image = node_image | default("alpine:latest") %} {# use harbor.nice.nokia.net/docker/alpine:latest if needed #}
 {% set node_count = node_count | default(4) %}
 {% set instance_id = instance_id | default(5) %}
 

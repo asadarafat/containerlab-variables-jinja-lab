@@ -1,6 +1,6 @@
 # Containerlab Variables and Jinja Lab
 
-Learn Containerlab by doing. This repo is a 1-2 hour lab exercise where every participant builds and runs their own labs while practicing:
+Learn Containerlab by doing. This repo is a 90-125 minute lab exercise where every participant builds and runs their own labs while practicing:
 - Variables for reusable topology inputs
 - Jinja templates for scalable topology generation
 - DRY (Don't Repeat Yourself) design in infra-as-code workflows
@@ -39,18 +39,20 @@ docker version
 jinja2 --version
 ```
 
-## Suggested Timeline (90-120 min)
+## Suggested Timeline (90-125 min)
 1. Exercise 1 - 10 to 15 min
 2. Exercise 2 - 15 to 20 min
 3. Exercise 3 - 15 to 20 min
 4. Exercise 4 - 15 to 20 min
 5. Exercise 5 - 20 to 30 min
+6. Exercise 6 - 15 to 20 min
 
 ## Quick Command Reference
 If `clab` alias exists:
 ```bash
 clab deploy -t <topo-file>
 clab inspect -t <topo-file>
+clab exec -t <topo-file> --label clab-node-name=<node> --cmd '<cmd>'
 clab destroy -t <topo-file>
 ```
 If not, replace `clab` with `containerlab`.
@@ -61,6 +63,7 @@ If not, replace `clab` with `containerlab`.
 - `exercises/03-vscode-bulk-links/` VS Code bulk link workflow
 - `exercises/04-jinja-template/` template + data + rendered example
 - `exercises/05-jinja-full-mesh/` starter/solution challenge for scalable full-mesh generation
+- `exercises/06-existing-bridge/` starter/reference challenge for reusing an existing OOB bridge
 
 ## Exercise Walkthrough
 
@@ -160,7 +163,22 @@ Steps:
 2. Fix mgmt IP math, duplicate links, and interface numbering.
 3. Use https://nebula.packetcoders.io/j2-render/ to render the template repeatedly with different `node_count` values (3 to 10), then deploy the rendered topology.
 
+### Exercise 6 - Existing Bridge Rescue Challenge
+Files:
+- `exercises/06-existing-bridge/README.md`
+- `exercises/06-existing-bridge/starter/topo06.BROKEN.clab.yaml`
+- `exercises/06-existing-bridge/topo06.clab.yaml` (facilitator reference)
+
+Goal:
+Adapt the exercise 2 variable pattern so the topology reuses an already existing `br_nsp_ip_oob` bridge.
+
+Steps:
+1. Start from the broken starter topology.
+2. Fix the lab name, management bridge, subnet, gateway, and management IPs.
+3. Deploy with `SUBNET_ID=7`, inspect, and verify reachability to `10.2.7.2`.
+
 ## Facilitator Notes
 - Keep participants in build-validate-destroy loops after every exercise.
 - Pre-pull images to reduce waiting time.
 - Hide `exercises/05-jinja-full-mesh/solution/` during the challenge.
+- Hide `exercises/06-existing-bridge/topo06.clab.yaml` during the challenge.
