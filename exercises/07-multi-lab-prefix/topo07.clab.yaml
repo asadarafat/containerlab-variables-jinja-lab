@@ -1,0 +1,33 @@
+# Exercise 7 reference solution
+
+# Deploy:
+#   SUBNET_ID=7 clab deploy -t topo07.clab.yaml
+#   PREFIX=-01 SUBNET_ID=7 clab deploy -t topo07.clab.yaml
+#   PREFIX=-02 SUBNET_ID=7 clab deploy -t topo07.clab.yaml
+
+# Destroy:
+#   PREFIX=-01 SUBNET_ID=7 clab destroy -t topo07.clab.yaml
+#   PREFIX=-02 SUBNET_ID=7 clab destroy -t topo07.clab.yaml
+
+name: topo07${PREFIX}
+
+mgmt:
+  network: nsp_ip_oob # docker network name for the OOB segment
+  bridge: br_nsp_ip_oob # existing host bridge
+  ipv4-subnet: 10.2.${SUBNET_ID}.0/24 # existing OOB subnet
+  ipv4-gw: 10.2.${SUBNET_ID}.2 # host bridge IP
+
+topology:
+  nodes:
+    r1:
+      kind: linux
+      image: harbor.nice.nokia.net/docker/alpine:latest
+      mgmt-ipv4: 10.2.${SUBNET_ID}.121 # ensure the last octet does not overlap with other clab topologies
+
+    r2:
+      kind: linux
+      image: harbor.nice.nokia.net/docker/alpine:latest
+      mgmt-ipv4: 10.2.${SUBNET_ID}.212 # ensure the last octet does not overlap with other clab topologies
+
+  links:
+    - endpoints: ["r1:eth1", "r2:eth1"]

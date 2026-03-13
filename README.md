@@ -1,6 +1,6 @@
 # Containerlab Variables and Jinja Lab
 
-Learn Containerlab by doing. This repo is a 90-125 minute lab exercise where every participant builds and runs their own labs while practicing:
+Learn Containerlab by doing. This repo is a 105-145 minute lab exercise where every participant builds and runs their own labs while practicing:
 - Variables for reusable topology inputs
 - Jinja templates for scalable topology generation
 - DRY (Don't Repeat Yourself) design in infra-as-code workflows
@@ -39,13 +39,14 @@ docker version
 jinja2 --version
 ```
 
-## Suggested Timeline (90-125 min)
+## Suggested Timeline (105-145 min)
 1. Exercise 1 - 10 to 15 min
 2. Exercise 2 - 15 to 20 min
 3. Exercise 3 - 15 to 20 min
 4. Exercise 4 - 15 to 20 min
 5. Exercise 5 - 20 to 30 min
 6. Exercise 6 - 15 to 20 min
+7. Exercise 7 - 15 to 20 min
 
 ## Quick Command Reference
 If `clab` alias exists:
@@ -64,6 +65,7 @@ If not, replace `clab` with `containerlab`.
 - `exercises/04-jinja-template/` template + data + rendered example
 - `exercises/05-jinja-full-mesh/` starter/solution challenge for scalable full-mesh generation
 - `exercises/06-existing-bridge/` starter/reference challenge for reusing an existing OOB bridge
+- `exercises/07-multi-lab-prefix/` starter/reference challenge for reusing one topology across multiple lab names
 
 ## Exercise Walkthrough
 
@@ -177,8 +179,23 @@ Steps:
 2. Fix the lab name, management bridge, subnet, gateway, and management IPs.
 3. Deploy with `SUBNET_ID=7`, inspect, and verify reachability to `10.2.7.2`.
 
+### Exercise 7 - Multi-Lab Prefix Challenge
+Files:
+- `exercises/07-multi-lab-prefix/README.md`
+- `exercises/07-multi-lab-prefix/starter/topo07.BROKEN.clab.yaml`
+- `exercises/07-multi-lab-prefix/topo07.clab.yaml` (facilitator reference)
+
+Goal:
+Reuse one topology file to deploy multiple labs on the same existing OOB bridge by changing only the lab name prefix and the non-overlapping management IP plan.
+
+Steps:
+1. Start from the broken starter topology.
+2. Fix the lab name so it supports `PREFIX=-01` and `PREFIX=-02` from the same file.
+3. Keep the topology on `br_nsp_ip_oob` and verify that the chosen last octets do not clash with other active labs.
+
 ## Facilitator Notes
 - Keep participants in build-validate-destroy loops after every exercise.
 - Pre-pull images to reduce waiting time.
 - Hide `exercises/05-jinja-full-mesh/solution/` during the challenge.
 - Hide `exercises/06-existing-bridge/topo06.clab.yaml` during the challenge.
+- Hide `exercises/07-multi-lab-prefix/topo07.clab.yaml` during the challenge.

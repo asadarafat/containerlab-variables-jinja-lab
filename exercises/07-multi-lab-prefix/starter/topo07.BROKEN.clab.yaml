@@ -1,0 +1,28 @@
+# Exercise 7 starter - intentionally broken
+
+# Goal:
+#  - Reuse the same topology file for multiple lab deployments
+#  - Keep the topology on the existing br_nsp_ip_oob bridge
+
+name: topo07
+
+mgmt:
+  network: nsp_ip_oob
+  bridge: br_nsp_ip_oob
+  ipv4-subnet: 10.2.${SUBNET_ID}.0/24
+  ipv4-gw: 10.2.${SUBNET_ID}.2
+
+topology:
+  nodes:
+    r1:
+      kind: linux
+      image: harbor.nice.nokia.net/docker/alpine:latest
+      mgmt-ipv4: 10.2.${SUBNET_ID}.11
+
+    r2:
+      kind: linux
+      image: harbor.nice.nokia.net/docker/alpine:latest
+      mgmt-ipv4: 10.2.${SUBNET_ID}.12
+
+  links:
+    - endpoints: ["r1:eth1", "r2:eth1"]
