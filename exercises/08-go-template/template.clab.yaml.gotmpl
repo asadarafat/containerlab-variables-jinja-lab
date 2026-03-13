@@ -1,0 +1,19 @@
+{{/*
+  Template for Exercise 8
+  Render with values.yaml (or your own data) in https://gotemplate.io/
+*/}}
+name: {{ .topo_name }}
+
+mgmt:
+  network: {{ .mgmt_network }}
+  ipv4-subnet: {{ .mgmt_subnet }}
+
+topology:
+  nodes:{{ range .nodes }}
+    {{ .name }}:
+      kind: linux
+      image: {{ $.node_image }}
+      mgmt-ipv4: {{ .mgmt_ipv4 }}{{ end }}
+
+  links:{{ range .links }}
+    - endpoints: ["{{ .a }}", "{{ .b }}"]{{ end }}

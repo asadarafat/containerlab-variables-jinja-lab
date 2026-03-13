@@ -1,6 +1,6 @@
 # Containerlab Variables and Jinja Lab
 
-Learn Containerlab by doing. This repo is a 105-145 minute lab exercise where every participant builds and runs their own labs while practicing:
+Learn Containerlab by doing. This repo is a 135-185 minute lab exercise where every participant builds and runs their own labs while practicing:
 - Variables for reusable topology inputs
 - Jinja templates for scalable topology generation
 - DRY (Don't Repeat Yourself) design in infra-as-code workflows
@@ -39,7 +39,7 @@ docker version
 jinja2 --version
 ```
 
-## Suggested Timeline (105-145 min)
+## Suggested Timeline (135-185 min)
 1. Exercise 1 - 10 to 15 min
 2. Exercise 2 - 15 to 20 min
 3. Exercise 3 - 15 to 20 min
@@ -47,6 +47,8 @@ jinja2 --version
 5. Exercise 5 - 20 to 30 min
 6. Exercise 6 - 15 to 20 min
 7. Exercise 7 - 15 to 20 min
+8. Exercise 8 - 15 to 20 min
+9. Exercise 9 - 15 to 20 min
 
 ## Quick Command Reference
 If `clab` alias exists:
@@ -66,6 +68,8 @@ If not, replace `clab` with `containerlab`.
 - `exercises/05-jinja-full-mesh/` starter/solution challenge for scalable full-mesh generation
 - `exercises/06-existing-bridge/` starter/reference challenge for reusing an existing OOB bridge
 - `exercises/07-multi-lab-prefix/` starter/reference challenge for reusing one topology across multiple lab names
+- `exercises/08-go-template/` Go template + data + rendered example using gotemplate.io
+- `exercises/09-native-go-template/` native containerlab Go template + vars + rendered example
 
 ## Exercise Walkthrough
 
@@ -192,6 +196,49 @@ Steps:
 1. Start from the broken starter topology.
 2. Fix the lab name so it supports `PREFIX=-01` and `PREFIX=-02` from the same file.
 3. Keep the topology on `br_nsp_ip_oob` and verify that the chosen last octets do not clash with other active labs.
+
+### Exercise 8 - Go Template Basics
+Files:
+- `exercises/08-go-template/template.clab.yaml.gotmpl`
+- `exercises/08-go-template/values.yaml`
+- `exercises/08-go-template/topo08.clab.yaml` (reference render)
+
+Goal:
+Render a Containerlab topology from a Go `text/template` using YAML data, then compare it with the rendered reference file.
+
+Steps:
+1. Open the online Go template renderer: https://gotemplate.io/
+2. Paste `template.clab.yaml.gotmpl` as the template input and `values.yaml` as the data input.
+3. Render the topology, compare it with `topo08.clab.yaml`, then change the node or link data and render again.
+
+Note:
+- `gotemplate.io` renders Go templates live in the browser and accepts YAML or JSON data input.
+- Unlike the Jinja example in exercise 4, this Go template version uses explicit node and link lists in `values.yaml`.
+
+### Exercise 9 - Native Containerlab Go Template
+Files:
+- `exercises/09-native-go-template/topo09.clab.gotmpl`
+- `exercises/09-native-go-template/topo09.clab_vars.yaml`
+- `exercises/09-native-go-template/topo09.clab.yaml` (reference render)
+
+Goal:
+Deploy a Go-templated topology directly with Containerlab, using the built-in `.clab.gotmpl` rendering workflow and native variable loading.
+
+Steps:
+1. Inspect `topo09.clab.gotmpl` and `topo09.clab_vars.yaml`.
+2. Deploy the template directly with Containerlab.
+```bash
+clab deploy -t exercises/09-native-go-template/topo09.clab.gotmpl
+```
+3. Optionally deploy the same template while passing the variable file explicitly.
+```bash
+clab deploy -t exercises/09-native-go-template/topo09.clab.gotmpl --vars exercises/09-native-go-template/topo09.clab_vars.yaml
+```
+4. Compare the generated topology with `topo09.clab.yaml`, then change the node or link data and redeploy.
+
+Note:
+- For `.clab.gotmpl` files, Containerlab can auto-load variables from a same-name `.clab_vars.yaml` file.
+- This exercise mirrors exercise 8, but the rendering happens natively inside `clab` instead of in `https://gotemplate.io/`.
 
 ## Facilitator Notes
 - Keep participants in build-validate-destroy loops after every exercise.
